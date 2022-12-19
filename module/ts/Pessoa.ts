@@ -1,5 +1,6 @@
-export class Pessoa {
-    private _nome;
-    private _cpf;
-    private _telefone;
+export abstract class Pessoa {
+    constructor(
+        protected nome: string,
+        protected cpf: number,
+        protected telefone:number){}
 }
