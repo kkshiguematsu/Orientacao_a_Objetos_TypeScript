@@ -1,6 +1,6 @@
 export abstract class Pessoa {
     constructor(
-        protected nome: string,
-        protected cpf: number,
-        protected telefone:number){}
+        private nome: string,
+        private cpf: number,
+        private telefone:number){}
 }

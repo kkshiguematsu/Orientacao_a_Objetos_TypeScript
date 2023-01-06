@@ -4,4 +4,7 @@ export class Funcionario extends Pessoa {
         super(nome, cpf, telefone);
         this.salario = salario;
     }
+    adicionaCargo(cargo) {
+        this.cargo = cargo;
+    }
 }
