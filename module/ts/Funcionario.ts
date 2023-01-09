@@ -9,7 +9,7 @@ export class Funcionario extends Pessoa{
         this.salario = salario
     }
 
-    adicionaCargo(cargo: Cargo){
-        this.cargo = cargo
+    adicionaCargo(cargo: string){
+        this.cargo = new Cargo(cargo)
     }
 }

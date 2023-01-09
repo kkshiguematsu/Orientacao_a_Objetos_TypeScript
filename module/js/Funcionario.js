@@ -1,3 +1,4 @@
+import { Cargo } from "./Cargo.js";
 import { Pessoa } from "./Pessoa.js";
 export class Funcionario extends Pessoa {
     constructor(nome, cpf, telefone, salario) {
@@ -5,6 +6,6 @@ export class Funcionario extends Pessoa {
         this.salario = salario;
     }
     adicionaCargo(cargo) {
-        this.cargo = cargo;
+        this.cargo = new Cargo(cargo);
     }
 }
