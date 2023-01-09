@@ -40,7 +40,7 @@ function aplicacao_4() {
     console.log(conta_poupanca.calcularSaldo());
 }
 function aplicacao_5() {
-    const conta_poupanca = new ContaPoupanca(0, "888");
+    const conta_poupanca = new ContaPoupanca(0.01, "888");
     conta_poupanca.depositar(200, new Date("2022-01-01"));
     conta_poupanca.depositar(200, new Date("2022-02-01"));
     conta_poupanca.depositar(200, new Date("2022-03-01"));

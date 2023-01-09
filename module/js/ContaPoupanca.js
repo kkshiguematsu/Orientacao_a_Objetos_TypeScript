@@ -25,7 +25,7 @@ export class ContaPoupanca extends Conta {
         console.log("====================");
         console.log(this.getTamanhoCredito());
         console.log(this.getTamanhoDebito());
-        while (contador_credito != this.getTamanhoCredito() && contador_debito != this.getTamanhoDebito()) {
+        while (true) {
             const data_debito = new Date(this.getDataDebito(contador_debito));
             const data_credito = new Date(this.getDataCredito(contador_credito));
             anos_debito = atual_ano - data_debito.getFullYear();
@@ -43,22 +43,55 @@ export class ContaPoupanca extends Conta {
                 }
                 saldo_temporario -= this.getDebito(contador_debito);
                 console.log("rendimento total debito: " + saldo_temporario);
+                console.log("====================");
                 ultima_data = data_debito;
                 contador_debito += 1;
-                console.log("====================");
+                if (contador_debito == this.getTamanhoDebito()) {
+                    while (contador_credito < this.getTamanhoCredito()) {
+                        const diferenca_meses = mes_credito - ultima_data.getMonth();
+                        for (let i = 0; i < diferenca_meses; i++) {
+                            rendimento = (saldo_temporario * this.rentabilidadeMensal);
+                            saldo_temporario += rendimento;
+                            console.log("rendimento: " + rendimento);
+                            console.log("aaaaaaaaa");
+                        }
+                        saldo_temporario += this.getCredito(contador_credito);
+                        console.log("rendimento total credito: " + saldo_temporario);
+                        console.log("====================");
+                        ultima_data = data_credito;
+                        contador_credito += 1;
+                    }
+                    break;
+                }
             }
             else {
                 const diferenca_meses = mes_credito - ultima_data.getMonth();
                 for (let i = 0; i < diferenca_meses; i++) {
-                    rendimento += (saldo_temporario * this.rentabilidadeMensal);
+                    rendimento = (saldo_temporario * this.rentabilidadeMensal);
                     saldo_temporario += rendimento;
                     console.log("rendimento: " + rendimento);
                 }
                 saldo_temporario += this.getCredito(contador_credito);
                 console.log("rendimento total credito: " + saldo_temporario);
+                console.log("====================");
                 ultima_data = data_credito;
                 contador_credito += 1;
-                console.log("====================");
+                if (contador_credito == this.getTamanhoCredito()) {
+                    while (contador_debito < this.getTamanhoDebito()) {
+                        const diferenca_meses = mes_debito - ultima_data.getMonth();
+                        for (let i = 0; i < diferenca_meses; i++) {
+                            rendimento = (saldo_temporario * this.rentabilidadeMensal);
+                            saldo_temporario += rendimento;
+                            console.log("rendimento: " + rendimento);
+                        }
+                        saldo_temporario += this.getDebito(contador_debito);
+                        console.log("rendimento total credito: " + saldo_temporario);
+                        console.log("====================");
+                        ultima_data = data_credito;
+                        contador_debito += 1;
+                        break;
+                    }
+                }
             }
         }
         return rendimento;
@@ -76,7 +109,6 @@ conta_poupanca.depositar(200, new Date("01/01/2022"));
 conta_poupanca.depositar(200, new Date("02/01/2022"));
 conta_poupanca.depositar(200, new Date("03/01/2022"));
 conta_poupanca.depositar(200, new Date("04/01/2022"));
-conta_poupanca.depositar(200, new Date("05/01/2022"));
-conta_poupanca.depositar(200, new Date("06/01/2022"));
 conta_poupanca.sacar(100, new Date("03/05/2022"));
+conta_poupanca.sacar(100, new Date("02/05/2022"));
 console.log("Saldo da conta: " + conta_poupanca.calcularSaldo());
