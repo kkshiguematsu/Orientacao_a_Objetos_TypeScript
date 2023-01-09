@@ -39,4 +39,22 @@ function aplicacao_4() {
     console.log(conta_corrente.calcularSaldo());
     console.log(conta_poupanca.calcularSaldo());
 }
-aplicacao_4();
+function aplicacao_5() {
+    const conta_poupanca = new ContaPoupanca(0, "888");
+    conta_poupanca.depositar(200, new Date("2022-01-01"));
+    conta_poupanca.depositar(200, new Date("2022-02-01"));
+    conta_poupanca.depositar(200, new Date("2022-03-01"));
+    conta_poupanca.depositar(200, new Date("2022-04-01"));
+    conta_poupanca.depositar(200, new Date("2022-05-01"));
+    conta_poupanca.depositar(200, new Date("2022-06-01"));
+    conta_poupanca.depositar(200, new Date("2022-07-01"));
+    conta_poupanca.depositar(200, new Date("2022-08-01"));
+    conta_poupanca.depositar(200, new Date("2022-09-01"));
+    conta_poupanca.depositar(200, new Date("2022-10-01"));
+    conta_poupanca.depositar(200, new Date("2022-11-01"));
+    conta_poupanca.depositar(200, new Date("2022-12-01"));
+    conta_poupanca.sacar(100, new Date("2022-03-05"));
+    conta_poupanca.sacar(200, new Date("2022-07-08"));
+    console.log("Saldo da conta: " + conta_poupanca.calcularSaldo());
+}
+aplicacao_5();

@@ -9,6 +9,18 @@ export class Conta {
     getNumero() {
         return this.numero;
     }
+    getDebito(index) {
+        return this.debitos[index].getValor();
+    }
+    getCredito(index) {
+        return this.creditos[index].getValor();
+    }
+    getDataDebito(index) {
+        return this.debitos[index].getData().toDateString();
+    }
+    getDataCredito(index) {
+        return this.creditos[index].getData().toDateString();
+    }
     getSomaDebito() {
         var soma = 0;
         this.debitos.forEach(debito => soma += debito.getValor());
@@ -24,6 +36,16 @@ export class Conta {
     }
     getTamanhoDebito() {
         return this.debitos.length;
+    }
+    listarDebitos() {
+        this.debitos.forEach(debito => {
+            console.log(debito);
+        });
+    }
+    listarCreditos() {
+        this.creditos.forEach(credito => {
+            console.log(credito);
+        });
     }
     depositar(valor, date) {
         const credito = new Credito(valor, date);

@@ -3,9 +3,6 @@ export class Debito {
         this.valor = valor;
         this.data = data;
     }
-    setValor(valor) {
-        this.valor = valor;
-    }
     getValor() {
         return this.valor;
     }

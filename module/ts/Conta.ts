@@ -20,7 +20,7 @@ export abstract class Conta{
         return this.creditos[index].getValor()
     }
 
-    getDataDebioto(index: number): string{
+    getDataDebito(index: number): string{
         return this.debitos[index].getData().toDateString()
     }
 
@@ -50,6 +50,18 @@ export abstract class Conta{
     
     getTamanhoDebito(): number{
         return this.debitos.length
+    }
+
+    listarDebitos(){
+        this.debitos.forEach(debito =>{
+            console.log(debito)
+        });
+    }
+
+    listarCreditos(){
+        this.creditos.forEach(credito =>{
+            console.log(credito)
+        });
     }
 
     depositar(valor: number, date: Date){
