@@ -5,8 +5,14 @@ export class ContaPoupanca extends Conta {
         this.rentabilidadeMensal = rentabilidadeMensal;
     }
     calacularRendimento() {
-        function modificar_rendimento(valor) {
-            return;
+        function modificar_saldo_temporario(mes, ultima_data, ultimo_valor, rentabilidadeMensal) {
+            const diferenca_meses = mes - ultima_data.getMonth();
+            for (let i = 0; i < diferenca_meses; i++) {
+                rendimento = (ultimo_valor * rentabilidadeMensal);
+                ultimo_valor += rendimento;
+                console.log("rendimento: " + rendimento);
+            }
+            return ultimo_valor;
         }
         const data_atual = new Date();
         const atual_ano = data_atual.getFullYear();
@@ -33,64 +39,54 @@ export class ContaPoupanca extends Conta {
             console.log("Mes credito:" + mes_credito);
             console.log("Mes debito:" + mes_debito);
             if (mes_debito < mes_credito) {
-                const diferenca_meses = mes_debito - ultima_data.getMonth();
-                for (let i = 0; i < diferenca_meses; i++) {
-                    rendimento = (saldo_temporario * this.rentabilidadeMensal);
-                    saldo_temporario += rendimento;
-                    console.log("rendimento: " + rendimento);
-                }
+                saldo_temporario = modificar_saldo_temporario(mes_debito, ultima_data, saldo_temporario, this.rentabilidadeMensal);
                 saldo_temporario -= this.getDebito(contador_debito);
                 console.log("rendimento total debito: " + saldo_temporario);
                 console.log("====================");
                 ultima_data = data_debito;
                 contador_debito += 1;
-                if (contador_debito == this.getTamanhoDebito()) {
-                    while (contador_credito < this.getTamanhoCredito()) {
-                        const data_credito = new Date(this.getDataCredito(contador_credito));
-                        console.log("Mes credito:" + data_credito.getMonth());
-                        const diferenca_meses = data_credito.getMonth() - ultima_data.getMonth();
-                        for (let i = 0; i < diferenca_meses; i++) {
-                            rendimento = (saldo_temporario * this.rentabilidadeMensal);
-                            saldo_temporario += rendimento;
-                            console.log("rendimento: " + rendimento);
-                        }
-                        saldo_temporario += this.getCredito(contador_credito);
-                        console.log("rendimento total credito: " + saldo_temporario);
-                        console.log("====================");
-                        ultima_data = data_credito;
-                        contador_credito += 1;
-                    }
-                    break;
-                }
             }
-            else {
-                const diferenca_meses = mes_credito - ultima_data.getMonth();
-                for (let i = 0; i < diferenca_meses; i++) {
-                    rendimento = (saldo_temporario * this.rentabilidadeMensal);
-                    saldo_temporario += rendimento;
-                    console.log("rendimento: " + rendimento);
-                }
+            else if (mes_debito > mes_credito) {
+                saldo_temporario = modificar_saldo_temporario(mes_credito, ultima_data, saldo_temporario, this.rentabilidadeMensal);
                 saldo_temporario += this.getCredito(contador_credito);
                 console.log("rendimento total credito: " + saldo_temporario);
                 console.log("====================");
                 ultima_data = data_credito;
                 contador_credito += 1;
-                if (contador_credito == this.getTamanhoCredito()) {
-                    while (contador_debito < this.getTamanhoDebito()) {
-                        const data_debito = new Date(this.getDataDebito(contador_debito));
-                        const diferenca_meses = data_debito.getMonth() - ultima_data.getMonth();
-                        for (let i = 0; i < diferenca_meses; i++) {
-                            rendimento = (saldo_temporario * this.rentabilidadeMensal);
-                            saldo_temporario += rendimento;
-                            console.log("rendimento: " + rendimento);
-                        }
-                        saldo_temporario += this.getDebito(contador_debito);
-                        console.log("rendimento total credito: " + saldo_temporario);
-                        console.log("====================");
-                        ultima_data = data_credito;
-                        contador_debito += 1;
-                        break;
-                    }
+            }
+            else {
+                saldo_temporario = modificar_saldo_temporario(mes_credito, ultima_data, saldo_temporario, this.rentabilidadeMensal);
+                saldo_temporario += this.getCredito(contador_credito);
+                saldo_temporario -= this.getDebito(contador_debito);
+                console.log("rendimento total credito: " + saldo_temporario);
+                console.log("====================");
+                ultima_data = data_credito;
+                contador_credito += 1;
+                contador_debito += 1;
+            }
+            if (contador_debito == this.getTamanhoDebito()) {
+                while (contador_credito < this.getTamanhoCredito()) {
+                    const data_credito = new Date(this.getDataCredito(contador_credito));
+                    console.log("Mes credito:" + data_credito.getMonth());
+                    saldo_temporario = modificar_saldo_temporario(data_credito.getMonth(), ultima_data, saldo_temporario, this.rentabilidadeMensal);
+                    saldo_temporario += this.getCredito(contador_credito);
+                    console.log("rendimento total credito: " + saldo_temporario);
+                    console.log("====================");
+                    ultima_data = data_credito;
+                    contador_credito += 1;
+                }
+                break;
+            }
+            else if (contador_credito == this.getTamanhoCredito()) {
+                while (contador_debito < this.getTamanhoDebito()) {
+                    const data_debito = new Date(this.getDataDebito(contador_debito));
+                    saldo_temporario = modificar_saldo_temporario(data_debito.getMonth(), ultima_data, saldo_temporario, this.rentabilidadeMensal);
+                    saldo_temporario += this.getDebito(contador_debito);
+                    console.log("rendimento total credito: " + saldo_temporario);
+                    console.log("====================");
+                    ultima_data = data_debito;
+                    contador_debito += 1;
+                    break;
                 }
             }
         }
