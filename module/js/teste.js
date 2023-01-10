@@ -41,20 +41,20 @@ function aplicacao_4() {
 }
 function aplicacao_5() {
     const conta_poupanca = new ContaPoupanca(0.01, "888");
-    conta_poupanca.depositar(200, new Date("2022-01-01"));
-    conta_poupanca.depositar(200, new Date("2022-02-01"));
-    conta_poupanca.depositar(200, new Date("2022-03-01"));
-    conta_poupanca.depositar(200, new Date("2022-04-01"));
-    conta_poupanca.depositar(200, new Date("2022-05-01"));
-    conta_poupanca.depositar(200, new Date("2022-06-01"));
-    conta_poupanca.depositar(200, new Date("2022-07-01"));
-    conta_poupanca.depositar(200, new Date("2022-08-01"));
-    conta_poupanca.depositar(200, new Date("2022-09-01"));
-    conta_poupanca.depositar(200, new Date("2022-10-01"));
-    conta_poupanca.depositar(200, new Date("2022-11-01"));
-    conta_poupanca.depositar(200, new Date("2022-12-01"));
-    conta_poupanca.sacar(100, new Date("2022-03-05"));
-    conta_poupanca.sacar(200, new Date("2022-07-08"));
+    conta_poupanca.depositar(200, new Date("01/01/2022"));
+    conta_poupanca.depositar(200, new Date("02/01/2022"));
+    conta_poupanca.depositar(200, new Date("03/01/2022"));
+    conta_poupanca.depositar(200, new Date("04/01/2022"));
+    conta_poupanca.depositar(200, new Date("05/01/2022"));
+    conta_poupanca.depositar(200, new Date("06/01/2022"));
+    conta_poupanca.depositar(200, new Date("07/01/2022"));
+    conta_poupanca.depositar(200, new Date("08/01/2022"));
+    conta_poupanca.depositar(200, new Date("09/01/2022"));
+    conta_poupanca.depositar(200, new Date("10/01/2022"));
+    conta_poupanca.depositar(200, new Date("11/01/2022"));
+    conta_poupanca.depositar(200, new Date("12/01/2022"));
+    conta_poupanca.sacar(100, new Date("03/05/2022"));
+    conta_poupanca.sacar(200, new Date("07/08/2022"));
     console.log("Saldo da conta: " + conta_poupanca.calcularSaldo());
 }
 aplicacao_5();

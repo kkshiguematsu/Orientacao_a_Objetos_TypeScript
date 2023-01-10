@@ -15,16 +15,14 @@ export class ContaPoupanca extends Conta {
         let mes_credito = 0;
         let anos_debito = 0;
         let mes_debito = 0;
-        let saldo_temporario = this.getCredito(0);
+        let saldo_temporario = 0;
         let rendimento = 0;
         let ultima_data = new Date(this.getDataCredito(0));
-        let contador_credito = 1, contador_debito = 0;
+        let contador_credito = 0, contador_debito = 0;
         rendimento = (saldo_temporario * this.rentabilidadeMensal);
         saldo_temporario += rendimento;
         console.log("Rendimento primeiro mes: " + saldo_temporario);
         console.log("====================");
-        console.log(this.getTamanhoCredito());
-        console.log(this.getTamanhoDebito());
         while (true) {
             const data_debito = new Date(this.getDataDebito(contador_debito));
             const data_credito = new Date(this.getDataCredito(contador_credito));
@@ -32,8 +30,8 @@ export class ContaPoupanca extends Conta {
             anos_credito = atual_ano - data_credito.getFullYear();
             mes_credito = data_credito.getMonth();
             mes_debito = data_debito.getMonth();
-            console.log("mes credito: " + mes_credito);
-            console.log("mes debito: " + mes_debito);
+            console.log("Mes credito:" + mes_credito);
+            console.log("Mes debito:" + mes_debito);
             if (mes_debito < mes_credito) {
                 const diferenca_meses = mes_debito - ultima_data.getMonth();
                 for (let i = 0; i < diferenca_meses; i++) {
@@ -48,12 +46,13 @@ export class ContaPoupanca extends Conta {
                 contador_debito += 1;
                 if (contador_debito == this.getTamanhoDebito()) {
                     while (contador_credito < this.getTamanhoCredito()) {
-                        const diferenca_meses = mes_credito - ultima_data.getMonth();
+                        const data_credito = new Date(this.getDataCredito(contador_credito));
+                        console.log("Mes credito:" + data_credito.getMonth());
+                        const diferenca_meses = data_credito.getMonth() - ultima_data.getMonth();
                         for (let i = 0; i < diferenca_meses; i++) {
                             rendimento = (saldo_temporario * this.rentabilidadeMensal);
                             saldo_temporario += rendimento;
                             console.log("rendimento: " + rendimento);
-                            console.log("aaaaaaaaa");
                         }
                         saldo_temporario += this.getCredito(contador_credito);
                         console.log("rendimento total credito: " + saldo_temporario);
@@ -78,7 +77,8 @@ export class ContaPoupanca extends Conta {
                 contador_credito += 1;
                 if (contador_credito == this.getTamanhoCredito()) {
                     while (contador_debito < this.getTamanhoDebito()) {
-                        const diferenca_meses = mes_debito - ultima_data.getMonth();
+                        const data_debito = new Date(this.getDataDebito(contador_debito));
+                        const diferenca_meses = data_debito.getMonth() - ultima_data.getMonth();
                         for (let i = 0; i < diferenca_meses; i++) {
                             rendimento = (saldo_temporario * this.rentabilidadeMensal);
                             saldo_temporario += rendimento;
@@ -104,11 +104,3 @@ export class ContaPoupanca extends Conta {
         return saldo;
     }
 }
-const conta_poupanca = new ContaPoupanca(0.01, "888");
-conta_poupanca.depositar(200, new Date("01/01/2022"));
-conta_poupanca.depositar(200, new Date("02/01/2022"));
-conta_poupanca.depositar(200, new Date("03/01/2022"));
-conta_poupanca.depositar(200, new Date("04/01/2022"));
-conta_poupanca.sacar(100, new Date("03/05/2022"));
-conta_poupanca.sacar(100, new Date("02/05/2022"));
-console.log("Saldo da conta: " + conta_poupanca.calcularSaldo());
