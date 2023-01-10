@@ -30,14 +30,15 @@ function aplicacao_3() {
 }
 function aplicacao_4() {
     const conta_corrente = new ContaCorrente(500, "777");
-    const cliente1 = new Cliente("kassiano", 123456789, 2199999999, true, null, conta_corrente);
-    cliente1.depositar("777", 1000, new Date("2023-01-07"));
-    const conta_poupanca = new ContaPoupanca(1, "888");
-    const cliente2 = new Cliente("carlos", 123456789, 2199999999, true, null, conta_poupanca);
-    cliente2.depositar("888", 1000, new Date("2023-01-07"));
-    cliente1.transferir("777", cliente2, "888", 500, new Date("2023-01-07"));
-    console.log(conta_corrente.calcularSaldo());
-    console.log(conta_poupanca.calcularSaldo());
+    const endereco = new Endereco("85850000", "aaaaaaa", "111", "ap2", "Sao Paulo", "sp");
+    const cliente1 = new Cliente("kassiano", 123456789, 2199999999, true, endereco, conta_corrente);
+    cliente1.depositar("777", 1000, new Date("01/07/2023"));
+    const conta_poupanca = new ContaPoupanca(0.01, "888");
+    const cliente2 = new Cliente("carlos", 123456789, 2199999999, true, endereco, conta_poupanca);
+    cliente2.depositar("888", 1000, new Date("01/07/2023"));
+    cliente1.transferir("777", cliente2, "888", 500, new Date("01/07/2023"));
+    console.log("Cliente1 com saldo: " + conta_corrente.calcularSaldo());
+    console.log("Cliente2 com saldo: " + conta_poupanca.calcularSaldo());
 }
 function aplicacao_5() {
     const conta_poupanca = new ContaPoupanca(0.01, "888");

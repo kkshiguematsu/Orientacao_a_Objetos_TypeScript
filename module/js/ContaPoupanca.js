@@ -29,15 +29,38 @@ export class ContaPoupanca extends Conta {
         saldo_temporario += rendimento;
         console.log("Rendimento primeiro mes: " + saldo_temporario);
         console.log("====================");
+        console.log(this.getTamanhoDebito());
+        console.log(this.getTamanhoCredito());
         while (true) {
+            if (this.getTamanhoDebito() == 0) {
+                while (contador_credito < this.getTamanhoCredito()) {
+                    const data_credito = new Date(this.getDataCredito(contador_credito));
+                    console.log("Mes credito:" + data_credito.getMonth());
+                    saldo_temporario = modificar_saldo_temporario(data_credito.getMonth(), ultima_data, saldo_temporario, this.rentabilidadeMensal);
+                    saldo_temporario += this.getCredito(contador_credito);
+                    console.log("rendimento total credito: " + saldo_temporario);
+                    console.log("====================");
+                    ultima_data = data_credito;
+                    contador_credito += 1;
+                }
+                break;
+            }
+            else if (this.getTamanhoCredito() == 0) {
+                while (contador_debito < this.getTamanhoDebito()) {
+                    const data_debito = new Date(this.getDataDebito(contador_debito));
+                    saldo_temporario = modificar_saldo_temporario(data_debito.getMonth(), ultima_data, saldo_temporario, this.rentabilidadeMensal);
+                    saldo_temporario += this.getDebito(contador_debito);
+                    console.log("rendimento total credito: " + saldo_temporario);
+                    console.log("====================");
+                    ultima_data = data_debito;
+                    contador_debito += 1;
+                    break;
+                }
+            }
             const data_debito = new Date(this.getDataDebito(contador_debito));
             const data_credito = new Date(this.getDataCredito(contador_credito));
-            anos_debito = atual_ano - data_debito.getFullYear();
-            anos_credito = atual_ano - data_credito.getFullYear();
             mes_credito = data_credito.getMonth();
             mes_debito = data_debito.getMonth();
-            console.log("Mes credito:" + mes_credito);
-            console.log("Mes debito:" + mes_debito);
             if (mes_debito < mes_credito) {
                 saldo_temporario = modificar_saldo_temporario(mes_debito, ultima_data, saldo_temporario, this.rentabilidadeMensal);
                 saldo_temporario -= this.getDebito(contador_debito);
